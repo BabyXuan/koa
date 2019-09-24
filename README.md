@@ -19,9 +19,9 @@
 ## Steps to produce:
 1. npm install
 2. npm run dev
-3. open localhost:3000 in the brower
-4. open localhost:3000/math in the brower
-5. open localhost: 3000/login in the brower
+3. open [localhost:3000](http://localhost:3000/) in the browser
+4. open [localhost:3000/math](http://localhost:3000/math) in the browser
+5. open [localhost:3000/login](http://localhost:3000/login) in the browser
     
     
     
