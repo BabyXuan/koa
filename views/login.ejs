@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/md5.min.js"></script>
+    <script src="/javascripts/jquery.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1><%= title %></h1>
+    <div>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" />
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" />
+    </div>
+    <div>
+        <span id="error"></span>
+        <button onclick="login()">login</button>
+    </div>
+    <div id="result"></div>
+</div>
+<script>
+    function login() {
+        const userName = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        if(userName === '' || userName.length === 0) {
+            document.getElementById("error").innerText = "Please enter the userName";
+            return;
+        }
+        if(password === '' || userName.trim() === '') {
+            document.getElementById("error").innerText = "Please enter the password";
+            return;
+        }
+        document.getElementById('error').innerText = '';
+        const hashName = md5(userName);
+        const hashPassword = md5(password);
+        $.post(
+            "/auth",
+            {
+                username: hashName,
+                password: hashPassword
+            },
+            function (data) {
+                parseData(data);
+                console.log(data.status, data.message)
+            });
+    }
+
+    function parseData(data) {
+        let displayMessage = '';
+        if(data.status === 2) {
+            displayMessage = "login success";
+        } else {
+            displayMessage = data.message;
+        }
+        document.getElementById('result').innerText = displayMessage;
+    }
+</script>
+</body>
+</html>
+

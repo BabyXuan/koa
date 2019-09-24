@@ -2,11 +2,13 @@
 <html>
 <head>
     <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/javascripts/jquery.js"></script>
 </head>
 <body onload="onLoad()">
     <div class="container">
         <h1><%= title %></h1>
+        <div id="result"></div>
     </div>
     <script>
         function onLoad() {
@@ -19,9 +21,9 @@
                 $.post(
                     "/calculate",
                     { expression },
-                    function (message) {
+                    function (res) {
                         //write the result to the client side
-                        document.write("The result is: " + message);
+                        document.getElementById('result').innerText = 'The result is: ' + res.message;
                     });
             }
         }
