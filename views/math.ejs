@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <script src="/javascripts/jquery.js"></script>
+</head>
+<body onload="onLoad()">
+    <div class="container">
+        <h1><%= title %></h1>
+    </div>
+    <script>
+        function onLoad() {
+            //prompt a popup for users to input valid expression
+            //assume that the rudimentary operation only includes + - * / & ()
+            const expression = prompt("please enter your math expression (please input only + - * / ( ) and numbers) : ");
+            //post to the server side to deal with the expression
+            //In the server-side, will provide a calculate entry point to calculate the result
+            if(expression && expression.length > 0) {
+                $.post(
+                    "/calculate",
+                    { expression },
+                    function (message) {
+                        //write the result to the client side
+                        document.write("The result is: " + message);
+                    });
+            }
+        }
+    </script>
+</body>
+</html>
